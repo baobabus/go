@@ -363,6 +363,7 @@ func assertE2I(inter *interfacetype, e eface, r *iface) {
 		// explicit conversions require non-nil interface value.
 		panic(&TypeAssertionError{"", "", inter.typ.string(), ""})
 	}
+	switchE2A(&e, &t, inter)
 	r.tab = getitab(inter, t, false)
 	r.data = e.data
 }
@@ -380,6 +381,7 @@ func assertE2I2(inter *interfacetype, e eface, r *iface) bool {
 		}
 		return false
 	}
+	switchE2A(&e, &t, inter)
 	tab := getitab(inter, t, true)
 	if tab == nil {
 		if r != nil {
